@@ -1,0 +1,52 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @company.name
+%p
+  %b Description:
+  = @company.description
+%p
+  %b Duedil co url:
+  = @company.duedil_co_url
+%p
+  %b Duedil locale:
+  = @company.duedil_locale
+%p
+  %b Incorporation date:
+  = @company.incorporation_date
+%p
+  %b Reg co num:
+  = @company.reg_co_num
+%p
+  %b Reg address1:
+  = @company.reg_address1
+%p
+  %b Reg address2:
+  = @company.reg_address2
+%p
+  %b Reg address3:
+  = @company.reg_address3
+%p
+  %b Reg address4:
+  = @company.reg_address4
+%p
+  %b Reg address postcode:
+  = @company.reg_address_postcode
+%p
+  %b Phone:
+  = @company.phone
+%p
+  %b Website:
+  = @company.website
+%p
+  %b Email:
+  = @company.email
+%p
+  %b Currency:
+  = @company.currency
+%p
+  %b Employee count:
+  = @company.employee_count
+= link_to 'Edit', edit_company_path(@company)
+|
+#{link_to 'Back', companies_path}

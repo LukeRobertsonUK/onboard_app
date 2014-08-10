@@ -1,0 +1,101 @@
+#spinner
+
+= form_for(@company) do |f|
+  - if @company.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@company.errors.count, "error")
+        prohibited this company from being saved:
+      %ul
+        - @company.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .col-md-4
+      .column_padding
+        %h3 Basic Information
+        .field
+          = f.label :name, "Company Name", class: "form_label"
+          %br/
+          = f.text_field :name
+        .field
+          = f.label :reg_co_num, "Registered Company Number", class: "form_label"
+          %br/
+          = f.text_field :reg_co_num
+        .field
+          = f.label :duedil_locale, "Country", class: "form_label"
+          %br/
+          = f.text_field :duedil_locale
+        .field
+          = f.label :incorporation_date, class: "form_label"
+          %br/
+          = f.text_field :incorporation_date, class: "datepicker"
+        .field
+          = f.label :description, "Description", class: "form_label"
+          %br/
+          = f.text_area :description, class: "company_description"
+        .field
+          = f.label :employee_count,  "Number of Employees", class: "form_label"
+          %br/
+          = f.text_field :employee_count
+        = f.hidden_field :duedil_co_url
+
+    .col-md-4
+      .column_padding
+        %h3 Registered Address
+        .field
+          = f.label :reg_address1, "Address Line 1", class: "form_label"
+          %br
+          = f.text_field :reg_address1
+        .field
+          = f.label :reg_address1, "Address Line 2", class: "form_label"
+          %br
+          = f.text_field :reg_address2
+        .field
+          = f.label :reg_address1, "Address Line 3", class: "form_label"
+          %br
+          = f.text_field :reg_address3
+        .field
+          = f.label :reg_address1, "Address Line 4", class: "form_label"
+          %br
+          = f.text_field :reg_address4
+        .field
+          = f.label :reg_address_postcode, "Postcode", class: "form_label"
+          %br/
+          = f.text_field :reg_address_postcode
+
+    .col-md-4
+      .column_padding
+        %h3 Financials
+        .field
+          = f.label :currency, "Reporting Currency", class: "form_label"
+          %br/
+          = f.text_field :currency
+        .field
+          = f.label :turnover, class: "form_label"
+          %br
+          = f.text_field :turnover
+        .field
+          = f.label :shareholders_funds, "Shareholders' Funds", class: "form_label"
+          %br
+          =f.text_field :shareholders_funds
+
+        %h3 Contact Information
+        .field
+          = f.label :website, class: "form_label"
+          %br/
+          = f.text_field :website
+        .field
+          = f.label :email, "Email Address", class: "form_label"
+          %br/
+          = f.text_field :email
+        .field
+          = f.label :phone, "Phone Number", class: "form_label"
+          %br/
+          = f.text_field :phone
+
+
+  .row
+    .col-md-12
+      .column_padding
+        .actions
+          = f.submit "Submit", class: "btn btn-success button_position"

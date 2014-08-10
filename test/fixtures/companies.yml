@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  duedil_co_url: MyString
+  duedil_locale: MyString
+  incorporation_date: 2014-08-08
+  reg_co_num: MyString
+  turnover: 
+  shareholders_funds: 
+  reg_address1: MyString
+  reg_address2: MyString
+  reg_address3: MyString
+  reg_address4: MyString
+  reg_address_postcode: MyString
+  phone: MyString
+  website: MyString
+  email: MyString
+  currency: MyString
+  employee_count: MyString
+
+two:
+  name: MyString
+  description: MyText
+  duedil_co_url: MyString
+  duedil_locale: MyString
+  incorporation_date: 2014-08-08
+  reg_co_num: MyString
+  turnover: 
+  shareholders_funds: 
+  reg_address1: MyString
+  reg_address2: MyString
+  reg_address3: MyString
+  reg_address4: MyString
+  reg_address_postcode: MyString
+  phone: MyString
+  website: MyString
+  email: MyString
+  currency: MyString
+  employee_count: MyString

@@ -1,0 +1,61 @@
+// Place all the styles related to the Companies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form_label {
+  font-size: 0.8em
+}
+
+.company_description {
+  height: 5em;
+  max-height: 10em;
+  width: 100%;
+
+}
+
+.column_padding {
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+input {
+  width: 100%
+}
+
+.button_position {
+  width: 10em;
+}
+
+.actions {
+  text-align: center;
+}
+
+.field {
+  margin-bottom: 0.25em;
+}
+
+
+.footer {
+
+  font-style: italic;
+  display: block;
+  width: 100%;
+  text-align: right;
+  position: fixed;
+  bottom: 0;
+  background: white;
+  padding-bottom: 0.5em;
+  padding-right: 0.5em;
+  padding-left: 2em;
+  font-size: 1em;
+  color: black;
+}
+
+.page_bottom {
+  margin-bottom: 2em;
+}
+
+.duedil_logo {
+  width: 6em;
+}
