@@ -1,12 +1,13 @@
 .row
   .col-md-12
     .column_padding
-      %h1 Enter Company Details
+      %h1.editing Edit Company Details
 = render 'form'
 .row
   .col-md-12
     .column_padding
       .actions.page_bottom
+        = link_to 'Show', @company, class: "btn btn-info button_position"
         = link_to 'Back', companies_path, class: "btn btn-default button_position"
 .footer
   Powered by

@@ -30,6 +30,8 @@ class Company < ActiveRecord::Base
     registered_address = Duedil.get("#{duedil_co_url}/registered-address")
     company_hash = {}
     if key_company_info
+        duedil_co_url[20] == "u" ? company_hash[:locale] = "UK" : company_hash[:locale] = "ROI"
+        company_hash[:reg_co_num] = key_company_info["id"]
         company_hash[:name] = key_company_info["name"]
         company_hash[:description] = key_company_info["description"]
         company_hash[:incorporation_date] = key_company_info["incorporation_date"]

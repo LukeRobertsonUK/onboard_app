@@ -95,3 +95,6 @@
       .column_padding
         .actions
           = f.submit "Submit", class: "btn btn-success button_position"
+          - if @editing
+            = link_to 'DueDil Refresh', edit_company_path(@company), class: "btn btn-danger button_position data_refresh"
+
