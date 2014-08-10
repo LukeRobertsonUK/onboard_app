@@ -95,7 +95,7 @@ $(function(){
 
           if (company_data.existing_record){
             spinner.spin(false);
-            alert("you have already onboarded ths company");
+            alert("You have already onboarded ths company");
             $("#company_name").val('');
             $("#company_duedil_co_url").val('');
             $("#company_duedil_locale").val('');
