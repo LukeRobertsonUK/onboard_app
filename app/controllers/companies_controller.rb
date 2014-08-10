@@ -7,8 +7,13 @@ class CompaniesController < ApplicationController
     if params["search_term"]
       @search_results = Company.duedil_search(params["search_term"], 10)
     elsif params["url"]
+      existing_record = Company.existing_record(params["url"])
 
-      @autopopulate_fields = Company.autopopulate_fields(params["url"])
+      if existing_record
+        @autopopulate_fields = {existing_record: true}
+      else
+        @autopopulate_fields = Company.autopopulate_fields(params["url"])
+      end
     end
 
     respond_to do |format|

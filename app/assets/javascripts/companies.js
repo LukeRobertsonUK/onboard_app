@@ -44,29 +44,54 @@ var target = document.getElementById('spinner');
     },
 
     select: function(event, ui){
+      $("#company_description").val('');
+      $('#company_reg_address1').val('');
+      $('#company_reg_address2').val('');
+      $('#company_reg_address3').val('');
+      $('#company_reg_address4').val('');
+      $('#company_reg_address_postcode').val('');
+      $('#company_phone').val('');
+      $('#company_email').val('');
+      $('#company_website').val('');
+      $('#company_currency').val('');
+      $("#company_employee_count").val('');
+      $("#company_incorporation_date").val('');
+      $("#company_turnover").val('');
+      $("#company_shareholders_funds").val('');
       var spinner = new Spinner(opts).spin(target);
       $("#company_name").val(ui.item.value.name);
       $("#company_duedil_co_url").val(ui.item.value.company_url);
       $("#company_duedil_locale").val(ui.item.value.locale);
       $("#company_reg_co_num").val(ui.item.value.id);
 
-      $.getJSON('/companies.json', {url: ui.item.value.company_url}, function(company_data){
-        $("#company_description").val(company_data.description);
-        $('#company_reg_address1').val(company_data.reg_address1);
-        $('#company_reg_address2').val(company_data.reg_address2);
-        $('#company_reg_address3').val(company_data.reg_address3);
-        $('#company_reg_address4').val(company_data.reg_address4);
-        $('#company_reg_address_postcode').val(company_data.reg_address_postcode);
-        $('#company_phone').val(company_data.phone);
-        $('#company_email').val(company_data.email);
-        $('#company_website').val(company_data.website);
-        $('#company_currency').val(company_data.currency);
-        $("#company_employee_count").val(company_data.employee_count);
-        $("#company_incorporation_date").val(company_data.incorporation_date);
-        $("#company_turnover").val(company_data.turnover);
-        $("#company_shareholders_funds").val(company_data.shareholders_funds);
-        spinner.spin(false);
 
+      $.getJSON('/companies.json', {url: ui.item.value.company_url}, function(company_data){
+
+        if (company_data.existing_record){
+          spinner.spin(false);
+          alert("you have already onboarded ths company");
+          $("#company_name").val('');
+          $("#company_duedil_co_url").val('');
+          $("#company_duedil_locale").val('');
+          $("#company_reg_co_num").val('');
+        }else{
+
+          $("#company_description").val(company_data.description);
+          $('#company_reg_address1').val(company_data.reg_address1);
+          $('#company_reg_address2').val(company_data.reg_address2);
+          $('#company_reg_address3').val(company_data.reg_address3);
+          $('#company_reg_address4').val(company_data.reg_address4);
+          $('#company_reg_address_postcode').val(company_data.reg_address_postcode);
+          $('#company_phone').val(company_data.phone);
+          $('#company_email').val(company_data.email);
+          $('#company_website').val(company_data.website);
+          $('#company_currency').val(company_data.currency);
+          $("#company_employee_count").val(company_data.employee_count);
+          $("#company_incorporation_date").val(company_data.incorporation_date);
+          $("#company_turnover").val(company_data.turnover);
+          $("#company_shareholders_funds").val(company_data.shareholders_funds);
+          spinner.spin(false);
+        }
       });
 
       return false;

@@ -51,4 +51,10 @@ class Company < ActiveRecord::Base
     end
     company_hash
   end
+
+  def self.existing_record(url)
+    Company.where(duedil_co_url: url).first
+  end
+
+
 end
