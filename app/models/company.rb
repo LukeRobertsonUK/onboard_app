@@ -3,14 +3,18 @@ class Company < ActiveRecord::Base
 
 
     def self.duedil_search(name, limit)
-        Duedil.company_search(name, limit)["data"].map do |item|
-            if item['locale']
-                item['locale'] = item['locale'].upcase
-                { label: "#{item['name']} (#{item['id']} / #{item['locale']})",
-                value: item }
-            else
-                { label: "#{item['name']} (#{item['id']})",
-                value: item }
+        response = Duedil.company_search(name, limit)
+
+        if response
+            response["data"].map do |item|
+                if item['locale']
+                    item['locale'] = item['locale'].upcase
+                    { label: "#{item['name']} (#{item['id']} / #{item['locale']})",
+                    value: item }
+                else
+                    { label: "#{item['name']} (#{item['id']})",
+                    value: item }
+                end
             end
         end
 

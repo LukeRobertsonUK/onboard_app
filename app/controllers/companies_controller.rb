@@ -2,12 +2,12 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-
-    @companies = Company.all
+    @companies = Company.all unless (params["search_term"] || params["url"])
 
     if params["search_term"]
       @search_results = Company.duedil_search(params["search_term"], 10)
     elsif params["url"]
+
       @autopopulate_fields = Company.autopopulate_fields(params["url"])
     end
 
