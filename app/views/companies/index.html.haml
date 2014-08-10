@@ -1,0 +1,17 @@
+.row
+  .col-md-12
+    .column_padding
+      %h1 Company List
+      - @companies.each do |company|
+        = one_liner(company)
+        = link_to 'Show', company, class: "btn btn-xs btn-primary"
+        = link_to 'Edit', edit_company_path(company), class: "btn btn-xs btn-info"
+        = link_to 'Delete', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"
+.row
+  .col-md-12
+    .column_padding
+      .actions.page_bottom
+        = link_to 'Add A Company', new_company_path, class: "btn btn-success button_position"
+.footer
+  Powered by
+  = image_tag 'duedil_logo.jpg', class: "duedil_logo"

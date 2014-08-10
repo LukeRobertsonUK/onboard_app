@@ -1,6 +1,10 @@
 class Company < ActiveRecord::Base
   attr_accessible :currency, :description, :duedil_co_url, :duedil_locale, :email, :employee_count, :incorporation_date, :name, :phone, :reg_address1, :reg_address2, :reg_address3, :reg_address4, :reg_address_postcode, :reg_co_num, :shareholders_funds, :turnover, :website, :turnover, :shareholders_funds
 
+  validates :name, presence: true
+  validates :reg_co_num, uniqueness: true
+  validates :reg_co_num, presence: true
+  validates :duedil_co_url, uniqueness: :true
 
     def self.duedil_search(name, limit)
         response = Duedil.company_search(name, limit)

@@ -1,6 +1,21 @@
 
 $(function(){
 
+  if($("#notice").length > 0){
+    $("button.close").on('click', function(e){
+      e.preventDefault;
+      $("#notice").hide();
+    })
+  }
+
+    if($("#form_errors").length > 0){
+    $("button.close").on('click', function(e){
+      e.preventDefault;
+      $("#form_errors").hide();
+    })
+  }
+
+
     var opts = {
       lines: 13, // The number of lines to draw
       length: 20, // The length of each line
