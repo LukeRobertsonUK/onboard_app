@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Forename:</b>
+  <%= @director.forename %>
+</p>
+
+<p>
+  <b>Surname:</b>
+  <%= @director.surname %>
+</p>
+
+<p>
+  <b>Date of birth:</b>
+  <%= @director.date_of_birth %>
+</p>
+
+<p>
+  <b>Duedil:</b>
+  <%= @director.duedil_id %>
+</p>
+
+<p>
+  <b>Duedil director url:</b>
+  <%= @director.duedil_director_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_director_path(@director) %> |
+<%= link_to 'Back', directors_path %>

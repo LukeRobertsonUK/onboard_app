@@ -1,4 +1,10 @@
 OnboardApp::Application.routes.draw do
+  resources :directorships
+
+
+  resources :directors
+
+
   root to: "companies#index"
 
   resources :companies

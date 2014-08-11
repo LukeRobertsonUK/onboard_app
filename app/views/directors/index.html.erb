@@ -1,0 +1,31 @@
+<h1>Listing directors</h1>
+
+<table>
+  <tr>
+    <th>Forename</th>
+    <th>Surname</th>
+    <th>Date of birth</th>
+    <th>Duedil</th>
+    <th>Duedil director url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @directors.each do |director| %>
+  <tr>
+    <td><%= director.forename %></td>
+    <td><%= director.surname %></td>
+    <td><%= director.date_of_birth %></td>
+    <td><%= director.duedil_id %></td>
+    <td><%= director.duedil_director_url %></td>
+    <td><%= link_to 'Show', director %></td>
+    <td><%= link_to 'Edit', edit_director_path(director) %></td>
+    <td><%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Director', new_director_path %>

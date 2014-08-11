@@ -1,6 +1,6 @@
 #spinner
 
-= form_for(@company) do |f|
+= nested_form_for(@company) do |f|
   - if @company.errors.any?
     #form_errors.row
       .col-md-12
@@ -92,6 +92,7 @@
           = f.label :phone, "Phone Number", class: "form_label"
           %br/
           = f.text_field :phone, :autocomplete => :off
+        = render "fields", f: f
 
 
   .row

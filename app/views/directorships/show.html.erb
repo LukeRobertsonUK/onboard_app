@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Director:</b>
+  <%= @directorship.director %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @directorship.company %>
+</p>
+
+
+<%= link_to 'Edit', edit_directorship_path(@directorship) %> |
+<%= link_to 'Back', directorships_path %>

@@ -1,0 +1,11 @@
+= f.fields_for :directors do |dsf|
+  .field
+    = dsf.label :forename
+    = dsf.text_field :forename
+  .field
+    = dsf.label :surename
+    = dsf.text_field :surname
+  .field
+    = dsf.link_to_remove "Remove"
+
+= f.link_to_add 'Add Director', :directors

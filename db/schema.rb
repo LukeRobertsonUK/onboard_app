@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140808200408) do
+ActiveRecord::Schema.define(:version => 20140811112247) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -35,5 +35,25 @@ ActiveRecord::Schema.define(:version => 20140808200408) do
     t.integer  "turnover",             :limit => 8
     t.integer  "shareholders_funds",   :limit => 8
   end
+
+  create_table "directors", :force => true do |t|
+    t.string   "forename"
+    t.string   "surname"
+    t.date     "date_of_birth"
+    t.string   "duedil_id"
+    t.string   "duedil_director_url"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "directorships", :force => true do |t|
+    t.integer  "director_id"
+    t.integer  "company_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "directorships", ["company_id"], :name => "index_directorships_on_company_id"
+  add_index "directorships", ["director_id"], :name => "index_directorships_on_director_id"
 
 end

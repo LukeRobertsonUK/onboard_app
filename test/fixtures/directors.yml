@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  forename: MyString
+  surname: MyString
+  date_of_birth: 2014-08-11
+  duedil_id: MyString
+  duedil_director_url: MyString
+
+two:
+  forename: MyString
+  surname: MyString
+  date_of_birth: 2014-08-11
+  duedil_id: MyString
+  duedil_director_url: MyString

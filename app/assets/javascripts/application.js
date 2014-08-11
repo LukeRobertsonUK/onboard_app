@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require spin.min.js
+//= require jquery_nested_form
 //= require jquery.spin.js
 //= require jquery-ui.min.js
 //= require jquery_ujs

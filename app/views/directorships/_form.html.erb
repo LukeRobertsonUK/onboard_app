@@ -1,0 +1,25 @@
+<%= form_for(@directorship) do |f| %>
+  <% if @directorship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@directorship.errors.count, "error") %> prohibited this directorship from being saved:</h2>
+
+      <ul>
+      <% @directorship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :director %><br />
+    <%= f.text_field :director %>
+  </div>
+  <div class="field">
+    <%= f.label :company %><br />
+    <%= f.text_field :company %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

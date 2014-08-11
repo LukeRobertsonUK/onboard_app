@@ -11,6 +11,7 @@ gem 'devise'
 gem 'haml'
 gem 'httparty'
 gem 'possessive'
+gem 'nested_form'
 
 group :development do
   gem 'pry-rails'
