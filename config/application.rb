@@ -58,7 +58,7 @@ module OnboardApp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
+    config.assets.initialize_on_precompile = false
     config.duedil =  {
 
       :pro_api_v3_key => ENV['DUEDIL_PRO_API_V3_KEY']
