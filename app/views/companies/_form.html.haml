@@ -27,6 +27,9 @@
           = f.text_field :reg_co_num, :autocomplete => :off
         .field
           = f.select( :duedil_locale, ["UK", "ROI"], {include_blank: "Country"})
+          - unless @editing
+            #lookup
+              = link_to 'Lookup', new_company_path, class: "btn btn-xs btn-danger"
         .field
           = f.label :incorporation_date, class: "form_label"
           %br/

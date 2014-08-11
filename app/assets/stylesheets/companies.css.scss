@@ -33,6 +33,7 @@ input {
 
 .field {
   margin-bottom: 0.25em;
+  position: relative;
 }
 
 
@@ -64,4 +65,10 @@ input {
   background: rgb(242,222,222);
   color: rgb(183,73,71);
 
+}
+
+#lookup {
+  position: absolute;
+  right: 0;
+  top: 8%;
 }

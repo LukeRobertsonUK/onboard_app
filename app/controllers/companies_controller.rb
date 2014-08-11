@@ -2,14 +2,27 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all unless (params["search_term"] || params["url"])
 
-    if params["search_term"]
-      @search_results = Company.duedil_search(params["search_term"], 10)
-    elsif params["url"]
-        existing_record = Company.existing_record(params["url"]) if params["check_existing"]
-        existing_record ? @autopopulate_fields = {existing_record: true} : @autopopulate_fields = Company.autopopulate_fields(params["url"])
-    end
+      url = "http://duedil.io/v3/#{params["locale"]}/companies/#{params["reg_co_num"]}".downcase if (params["locale"] && params["reg_co_num"])
+      url = params["url"] if params["url"]
+
+      @companies = Company.all unless (params["search_term"] || url)
+      @search_results = Company.duedil_search(params["search_term"], 10)  if params["search_term"]
+
+      if url
+        existing_record = Company.existing_record(url)
+        if existing_record
+          if params["check_existing"]
+            @autopopulate_fields = {existing_record: true}
+            @autopopulate_fields[:name] = existing_record.name
+          else
+            @autopopulate_fields = Company.autopopulate_fields(url)
+            @autopopulate_fields[:existing_record] = true
+          end
+        else
+          @autopopulate_fields = Company.autopopulate_fields(url)
+        end
+      end
 
     respond_to do |format|
       format.html # index.html.erb
