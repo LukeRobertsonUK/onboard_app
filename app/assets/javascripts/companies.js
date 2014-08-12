@@ -30,6 +30,26 @@ $("#lookup").on('click', function(e){
 })
 
 
+$("#company_duedil_locale").change(function(){
+  if(($("#company_duedil_locale").val().length > 0) && ($("#company_reg_co_num").val().length > 0)){
+    $("#lookup").fadeIn(500);
+  }else{
+    $("#lookup").fadeOut(200);
+  }
+})
+
+$("#company_reg_co_num").keyup(function(){
+  if(($("#company_duedil_locale").val().length > 0) && ($("#company_reg_co_num").val().length > 0)){
+    $("#lookup").fadeIn(500);
+  }else{
+    $("#lookup").fadeOut(200);
+  }
+})
+
+
+
+
+
 var updateSecondaryCompanyFields = function(company_data){
       $("#company_description").val(company_data.description);
       $('#company_reg_address1').val(company_data.reg_address1);
@@ -143,6 +163,7 @@ var clearPrimaryCompanyFIelds = function(){
         return false;
       },
       select: function(event, ui){
+        $("#lookup").fadeOut(200);
         clearSecondaryCompanyFields();
         var spinner = new Spinner(opts).spin(target);
         $("#company_name").val(ui.item.value.name);
