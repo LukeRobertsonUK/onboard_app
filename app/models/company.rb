@@ -88,11 +88,11 @@ class Company < ActiveRecord::Base
       next_directorships_url = response["pagination"]["next_url"]
     end
 
-    directorships_list.reject!{|director_hash| director_hash["active"] != true}.map do |directorship_hash|
+    directorships_list.map do |directorship_hash|
       directorship_hash[:director] = directors_list.select {|director_hash| director_hash["director_url"] == directorship_hash["directors_uri"]}[0]
     end
 
-    directorships_list
+    directorships_list.reject{|director_hash| director_hash["active"] != true}
 
   end
 
