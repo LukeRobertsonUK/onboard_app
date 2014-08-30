@@ -63,18 +63,32 @@ class Company < ActiveRecord::Base
     Company.where(duedil_co_url: url).first
   end
 
-  def get_directorships
+  def get_active_directorships
     directors_response = Duedil.get("#{duedil_co_url}/directors", {limit: 100})
     directors_list = directors_response["data"]
-    # insert logic here to page through results for full directors list if applicable
+
+    next_directors_url = directors_response["pagination"]["next_url"]
+
+    while next_directors_url
+      response = Duedil.get_page(next_directors_url)
+      directors_list << response["data"]
+      directors_list.flatten!
+      next_directors_url = response["pagination"]["next_url"]
+    end
 
     directorships_response= Duedil.get("#{duedil_co_url}/directorships", {limit: 100})
-
-    # insert logic here to page through results for full directorships list if applicable
-
     directorships_list = directorships_response["data"]
 
-    directorships_list.map do |directorship_hash|
+    next_directorships_url = directorships_response["pagination"]["next_url"]
+
+    while next_directorships_url
+      response = Duedil.get_page(next_directorships_url)
+      directorships_list << response["data"]
+      directorships_list.flatten!
+      next_directorships_url = response["pagination"]["next_url"]
+    end
+
+    directorships_list.reject!{|director_hash| director_hash["active"] != true}.map do |directorship_hash|
       directorship_hash[:director] = directors_list.select {|director_hash| director_hash["director_url"] == directorship_hash["directors_uri"]}[0]
     end
 

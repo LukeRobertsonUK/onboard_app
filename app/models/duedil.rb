@@ -12,5 +12,8 @@ class Duedil
     end
   end
 
+  def self.get_page(url)
+      (HTTParty.get(URI.encode("#{url}&api_key=#{Rails.application.config.duedil[:pro_api_v3_key]}")))["response"]
+  end
 
 end
