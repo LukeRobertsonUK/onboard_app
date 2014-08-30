@@ -53,3 +53,24 @@
         = link_to 'Edit', edit_company_path(@company), class: "btn btn-info button_position"
         = link_to 'Back', companies_path, class: "btn btn-default button_position"
 
+.row
+  - @directorships.each do |directorship|
+    %ul
+      %li
+        ="#{directorship[:director]["forename"]} #{directorship[:director]["surname"]}"
+      %li
+        = "DOB: #{directorship[:director]["date_of_birth"]}"
+      %li
+        = "Appointed: #{directorship["appointment_date"]}"
+      %li
+        = "Active: #{directorship["active"]}"
+      %li
+        = "Status: #{directorship["status"]}"
+      %li
+        = "Function: #{directorship["function"]}"
+      %li
+        = "Position: #{directorship["position"]}"
+      - if (directorship["founding"] && directorship["founding"] == true)
+        %li FOUNDER
+    %br
+    %br

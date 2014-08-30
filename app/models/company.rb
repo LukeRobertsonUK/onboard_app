@@ -28,12 +28,6 @@ class Company < ActiveRecord::Base
                 end
             end
         end
-
-
-    # search_results = {}
-    # search_results["array_of_names"] = response["data"].map { |result| result["name"] }
-    # response["data"].each {|result| search_results[result["name"]] = result}
-    # search_results
   end
 
   def self.autopopulate_fields(duedil_co_url)
@@ -67,6 +61,25 @@ class Company < ActiveRecord::Base
 
   def self.existing_record(url)
     Company.where(duedil_co_url: url).first
+  end
+
+  def get_directorships
+    directors_response = Duedil.get("#{duedil_co_url}/directors", {limit: 100})
+    directors_list = directors_response["data"]
+    # insert logic here to page through results for full directors list if applicable
+
+    directorships_response= Duedil.get("#{duedil_co_url}/directorships", {limit: 100})
+
+    # insert logic here to page through results for full directorships list if applicable
+
+    directorships_list = directorships_response["data"]
+
+    directorships_list.map do |directorship_hash|
+      directorship_hash[:director] = directors_list.select {|director_hash| director_hash["director_url"] == directorship_hash["directors_uri"]}[0]
+    end
+
+    directorships_list
+
   end
 
 
