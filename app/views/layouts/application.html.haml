@@ -1,13 +1,14 @@
 !!!
 %html
   %head
-    %title OnboardApp
+    %title DueDil API Demo: Company Onboarding
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
   %body
-    #container
+    .container
       = yield
-      .footer
-        Powered by
-        = image_tag 'duedil_logo.jpg', class: "duedil_logo"
+  .footer
+    Powered by
+    = image_tag 'duedil_logo.jpg', class: "duedil_logo"
