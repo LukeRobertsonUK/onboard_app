@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140811112247) do
+ActiveRecord::Schema.define(:version => 20141112162446) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -49,8 +49,20 @@ ActiveRecord::Schema.define(:version => 20140811112247) do
   create_table "directorships", :force => true do |t|
     t.integer  "director_id"
     t.integer  "company_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "duedil_id"
+    t.boolean  "active"
+    t.string   "status"
+    t.string   "appointment_date"
+    t.string   "function"
+    t.string   "position"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "address3"
+    t.string   "address4"
+    t.string   "address5"
+    t.string   "postcode"
   end
 
   add_index "directorships", ["company_id"], :name => "index_directorships_on_company_id"

@@ -1,0 +1,13 @@
+- if @company.directorships.blank?
+  = link_to "Import Directors", company_import_directors_path(@company), remote: :true
+-else
+  %h2
+    Directors
+  - @company.directorships.each do |directorship|
+    = directorship.director_forename
+    = directorship.director_surname
+    = directorship.director_date_of_birth
+
+
+
+  = link_to "Re-import Directors", company_import_directors_path(@company), remote: :true

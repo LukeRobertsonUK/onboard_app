@@ -50,6 +50,17 @@ class CompaniesController < ApplicationController
     @editing = true
   end
 
+  def import_directors
+    @company = Company.find(params[:company_id])
+    @company.import_directors
+
+    respond_to do |format|
+      format.js {}
+    end
+
+  end
+
+
   # POST /companies
   # POST /companies.json
   def create

@@ -7,7 +7,9 @@ OnboardApp::Application.routes.draw do
 
   root to: "companies#index"
 
-  resources :companies
+  resources :companies do
+    get 'import_directors', to: "companies#import_directors"
+  end
 
 
   # The priority is based upon order of creation:

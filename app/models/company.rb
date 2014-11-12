@@ -3,14 +3,18 @@ class Company < ActiveRecord::Base
 
   has_many :directorships
   has_many :directors, through: :directorships
-
   validates :name, presence: true
   validates :reg_co_num, uniqueness: true
   validates :reg_co_num, presence: true
   validates :duedil_co_url, uniqueness: :true
-
+  before_destroy :delete_directorships
   accepts_nested_attributes_for :directorships, allow_destroy: true
   accepts_nested_attributes_for :directors, allow_destroy: true
+
+    def delete_directorships
+      Directorship.where(company_id: self.id).each {|directorship| directorship.destroy}
+    end
+
 
 
     def self.duedil_search(name, limit)
@@ -96,5 +100,48 @@ class Company < ActiveRecord::Base
 
   end
 
+  def import_directors
+    get_active_directorships.each do |directorship_hash|
+
+      director_record = Director.find_or_initialize_by_duedil_director_url(directorship_hash[:director]["director_url"])
+      director_record.update_attributes!(
+        duedil_id: directorship_hash[:director]["id"],
+        forename: directorship_hash[:director]["forename"],
+        surname: directorship_hash[:director]["surname"],
+        date_of_birth: directorship_hash[:director]["date_of_birth"]
+      )
+
+      directorship_record = Directorship.find_or_initialize_by_company_id_and_director_id(self.id, director_record.id)
+      directorship_record.update_attributes!(
+        duedil_id: directorship_hash["id"],
+        active: directorship_hash["active"],
+        status: directorship_hash["status"],
+        appointment_date: directorship_hash["appointment_date"],
+        function: directorship_hash["function"],
+        position: directorship_hash["position"],
+        address1: directorship_hash["address1"],
+        address2: directorship_hash["address2"],
+        address3: directorship_hash["address3"],
+        address4: directorship_hash["address4"],
+        postcode: directorship_hash["postcode"]
+      )
+
+    end
+
+
+  end
+
+
+
 
 end
+
+
+
+
+
+
+
+
+
+
