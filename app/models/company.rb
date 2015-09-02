@@ -35,11 +35,12 @@ class Company < ActiveRecord::Base
   end
 
   def self.autopopulate_fields(duedil_co_url)
+    company_hash = {}
     key_company_info = Futuroscope::Future.new{ Duedil.get(duedil_co_url)}
     registered_address = Futuroscope::Future.new{ Duedil.get("#{duedil_co_url}/registered-address")}
 
-    company_hash = {}
-    if key_company_info
+
+    if key_company_info.future_value
         company_hash[:duedil_co_url] = duedil_co_url
         duedil_co_url[20] == "u" ? company_hash[:locale] = "UK" : company_hash[:locale] = "ROI"
         company_hash[:reg_co_num] = key_company_info["id"]
@@ -52,7 +53,7 @@ class Company < ActiveRecord::Base
         company_hash[:turnover] = key_company_info["accounts_turnover"]
         company_hash[:shareholders_funds] = key_company_info["accounts_shareholder_funds"]
     end
-    if registered_address
+    if registered_address.future_value
         company_hash[:website] = registered_address["website"]
         company_hash[:email] = registered_address["email"]
         company_hash[:reg_address1] = registered_address["address1"]
@@ -63,6 +64,7 @@ class Company < ActiveRecord::Base
         company_hash[:phone] = registered_address["phone"]
     end
     company_hash
+
   end
 
   def self.existing_record(url)
