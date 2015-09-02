@@ -70,29 +70,38 @@ class Company < ActiveRecord::Base
   end
 
   def get_active_directorships
-    directors_response = Duedil.get("#{duedil_co_url}/directors", {limit: 100})
-    directors_list = directors_response["data"]
+    directors_list = Futuroscope::Future.new {
+      directors_response = Duedil.get("#{duedil_co_url}/directors", {limit: 100})
+      list = directors_response["data"]
+      next_directors_url = directors_response["pagination"]["next_url"]
 
-    next_directors_url = directors_response["pagination"]["next_url"]
+      while next_directors_url
+        response = Duedil.get_page(next_directors_url)
+        list << response["data"]
+        list.flatten!
+        next_directors_url = response["pagination"]["next_url"]
+      end
+      list
+    }
 
-    while next_directors_url
-      response = Duedil.get_page(next_directors_url)
-      directors_list << response["data"]
-      directors_list.flatten!
-      next_directors_url = response["pagination"]["next_url"]
-    end
+      directorships_list = Futuroscope::Future.new {
+        directorships_response= Duedil.get("#{duedil_co_url}/directorships", {limit: 100})
+        list = directorships_response["data"]
+        next_directorships_url = directorships_response["pagination"]["next_url"]
 
-    directorships_response= Duedil.get("#{duedil_co_url}/directorships", {limit: 100})
-    directorships_list = directorships_response["data"]
+        while next_directorships_url
+          response = Duedil.get_page(next_directorships_url)
+          directorships_list << response["data"]
+          directorships_list.flatten!
+          next_directorships_url = response["pagination"]["next_url"]
+        end
+        list
+      }
 
-    next_directorships_url = directorships_response["pagination"]["next_url"]
 
-    while next_directorships_url
-      response = Duedil.get_page(next_directorships_url)
-      directorships_list << response["data"]
-      directorships_list.flatten!
-      next_directorships_url = response["pagination"]["next_url"]
-    end
+
+
+
 
     directorships_list.map do |directorship_hash|
       directorship_hash[:director] = directors_list.select {|director_hash| director_hash["director_url"] == directorship_hash["directors_uri"]}[0]

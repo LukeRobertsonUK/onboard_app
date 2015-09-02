@@ -3,11 +3,13 @@
 -else
   %h2
     Directors
-  - @company.directorships.each do |directorship|
-    = directorship.director_forename
-    = directorship.director_surname
-    = directorship.director_date_of_birth
-
+  %ul
+    - @company.directorships.each do |directorship|
+      %li
+        = directorship.director_forename
+        = directorship.director_surname
+        |
+        = directorship.director_date_of_birth
 
 
   = link_to "Re-import Directors", company_import_directors_path(@company), remote: :true
