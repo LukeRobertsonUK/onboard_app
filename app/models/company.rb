@@ -35,8 +35,9 @@ class Company < ActiveRecord::Base
   end
 
   def self.autopopulate_fields(duedil_co_url)
-    key_company_info = Duedil.get(duedil_co_url)
-    registered_address = Duedil.get("#{duedil_co_url}/registered-address")
+    key_company_info = Futuroscope::Future.new{ Duedil.get(duedil_co_url)}
+    registered_address = Futuroscope::Future.new{ Duedil.get("#{duedil_co_url}/registered-address")}
+
     company_hash = {}
     if key_company_info
         company_hash[:duedil_co_url] = duedil_co_url

@@ -61,6 +61,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    futuroscope (0.1.11)
     haml (4.0.3)
       tilt
     hike (1.2.3)
@@ -160,6 +161,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
+  futuroscope
   haml
   httparty
   jquery-rails

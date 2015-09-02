@@ -12,6 +12,7 @@ gem 'haml'
 gem 'httparty'
 gem 'possessive'
 gem 'nested_form'
+gem 'futuroscope'
 
 group :development do
   gem 'pry-rails'
